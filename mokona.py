@@ -15,7 +15,7 @@ app = Flask(__name__)
 @app.route("/")
 def hello():
     now = datetime.datetime.now()
-    timeString = now.strftime("%Y-%m-%d %H:%M")
+    timeString = now.strftime("%d %B %Y, %A, %H:%m")
     templateData = {
         "title": "Mokona",
         "time": timeString,
@@ -31,7 +31,7 @@ def choosemokona():
 
 def choosephrase():
     bpth = os.path.dirname(os.path.realpath(__file__))
-    lines = pd.read_csv(os.path.join(bpth, "phrases.txt"), names=["phrase"])
+    lines = pd.read_csv(os.path.join(bpth, "phrases.txt"), names=["phrase"], sep=";")
     return lines.sample().iloc[0][0]
 
 
