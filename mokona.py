@@ -6,6 +6,8 @@ from flask import Flask, render_template
 import datetime
 import pandas as pd
 import os
+import random
+
 
 app = Flask(__name__)
 
@@ -14,8 +16,17 @@ app = Flask(__name__)
 def hello():
     now = datetime.datetime.now()
     timeString = now.strftime("%Y-%m-%d %H:%M")
-    templateData = {"title": "Mokona", "time": timeString, "phrase": choosephrase()}
+    templateData = {
+        "title": "Mokona",
+        "time": timeString,
+        "phrase": choosephrase(),
+        "mokona": choosemokona(),
+    }
     return render_template("index.html", **templateData)
+
+
+def choosemokona():
+    return ["mokona", "blackmokona"][random.randint(0, 1)]
 
 
 def choosephrase():
